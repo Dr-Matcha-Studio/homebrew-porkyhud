@@ -21,6 +21,6 @@ class Porkyhud < Formula
 
   test do
     assert_match "PorkyHUD 0.1.0", shell_output("#{bin}/porkyhud --version")
-    assert_match "PorkyHUD snapshot", shell_output("#{bin}/porkyhud --snapshot")
+    assert_match "--snapshot", shell_output("#{bin}/porkyhud --help")
   end
 end

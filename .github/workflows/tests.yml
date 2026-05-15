@@ -1,0 +1,28 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  homebrew:
+    runs-on: macos-15
+    steps:
+      - name: Check out tap
+        uses: actions/checkout@v4
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Tap local checkout
+        run: brew tap Dr-Matcha-Studio/porkyhud "$GITHUB_WORKSPACE"
+
+      - name: Audit formula
+        run: brew audit --strict --online Dr-Matcha-Studio/porkyhud/porkyhud
+
+      - name: Install formula
+        run: brew install Dr-Matcha-Studio/porkyhud/porkyhud
+
+      - name: Test formula
+        run: brew test Dr-Matcha-Studio/porkyhud/porkyhud
